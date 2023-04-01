@@ -8,27 +8,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BenTriesChess
 {
     public partial class Form1 : Form
     {
-        //Board Width
+        //Board Info
         int boardWidth = 8;
-        new Tile testTile = new Tile(new Point(12,12),Color.SaddleBrown);
-        new PictureBox pictureBox = new PictureBox();
+        public static int currentTile;
+
 
         //Array: - Board Layout - Availible Spaces to Move - Physical instances of each tile as a PictureBox
-        Image[] boardLayout = new Image[] {
-Resources.BlackRook,Resources.BlackHorse,Resources.BlackBishop,Resources.BlackKing,Resources.BlackQueen,Resources.BlackBishop,Resources.BlackHorse,Resources.BlackRook,
-Resources.BlackPawn,Resources.BlackPawn,Resources.BlackPawn,Resources.BlackPawn,Resources.BlackPawn,Resources.BlackPawn,Resources.BlackPawn,Resources.BlackPawn,
-Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,
-Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,
-Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,
-Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,Resources.Empty,
-Resources.WhitePawn,Resources.WhitePawn,Resources.WhitePawn,Resources.WhitePawn,Resources.WhitePawn,Resources.WhitePawn,Resources.WhitePawn,Resources.WhitePawn,
-Resources.WhiteRook,Resources.WhiteHorse,Resources.WhiteBishop,Resources.WhiteKing,Resources.WhiteQueen,Resources.WhiteBishop,Resources.WhiteHorse,Resources.WhiteRook,
+        string[] boardLayout = new string[] {
+"BlackRook","BlackHorse","BlackBishop","BlackKing","BlackQueen","BlackBishop","BlackHorse","BlackRook",
+"BlackPawn","BlackPawn","BlackPawn","BlackPawn","BlackPawn","BlackPawn","BlackPawn","BlackPawn",
+"Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty",
+"Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty",
+"Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty",
+"Empty","Empty","Empty","Empty","Empty","Empty","Empty","Empty",
+"WhitePawn","WhitePawn","WhitePawn","WhitePawn","WhitePawn","WhitePawn","WhitePawn","WhitePawn",
+            "WhiteRook","WhiteHorse","WhiteBishop","WhiteKing","WhiteQueen","WhiteBishop","WhiteHorse","WhiteRook",
         };
+
+        Image[] imageArray = new Image[] { Resources.Empty, Resources.BlackPawn,Resources.BlackRook, Resources.BlackHorse, Resources.BlackBishop, Resources.BlackKing, Resources.BlackQueen, Resources.WhitePawn, Resources.WhiteRook, Resources.WhiteHorse, Resources.WhiteBishop, Resources.WhiteKing, Resources.WhiteQueen, };
+        string[] stringArray = new string[] {"Empty","BlackPawn","BlackRook","BlackHorse","BlackBishop","BlackKing","BlackQueen","WhitePawn","WhiteRook", "WhiteHorse", "WhiteBishop", "WhiteKing", "WhiteQueen", };
+
+
 
 
         bool[] availibleSpace = new bool[] {
@@ -42,78 +48,49 @@ Resources.WhiteRook,Resources.WhiteHorse,Resources.WhiteBishop,Resources.WhiteKi
         false, false, false, false, false, false, false, false,
         };
 
-        #region allTiles
-        Tile[] tileArray = new Tile[] {
-        new Tile(new Point(12,12),Color.SaddleBrown),
-         new Tile(new Point(118, 12),Color.White),
-        new Tile(new Point(224,12),Color.SaddleBrown),
-         new Tile(new Point(330, 10),Color.White),
-         //        new Tile(new Point(436,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-         //        new Tile(new Point(12,12),Color.SaddleBrown),
-         //new Tile(new Point(10, 10),Color.White),
-        };
-        #endregion
+
+        List<Tile> tileArray = new List<Tile> { };
+
         public Form1()
         {
+            for (int i = 1; i <= 64; i++)
+            {
+                int heightCount = 0;
+                int widthCount = i;
+                int colorTracker = i;
+
+                Color paintThisColor = Color.SaddleBrown;
+
+                while (widthCount > boardWidth)
+                {
+                    widthCount -= boardWidth;
+                    heightCount++;
+                    colorTracker++;
+                }
+                if (colorTracker % 2 == 0) { paintThisColor = Color.White; }
+                tileArray.Add(new Tile(new Point(12 + (72 * widthCount), 12 + (72 * heightCount)), paintThisColor, i - 1, boardLayout[i-1]));
+            }
             InitializeComponent();
             updateDisplay();
         }
 
         void updateDisplay()
         {
-            for (int x = 0; x <= tileArray.Length - 1; x++)
+            for (int x = 0; x <= tileArray.Count - 1; x++)
             {
-                tileArray[x].pictureBox.Image = boardLayout[x];
-                if (availibleSpace[x] == true) { tileArray[x].pictureBox.BackgroundImage = Resources.CanMoveHere; }
+                this.Controls.Add(tileArray[x].pictureBox);
+                for (int y = 0; y <= imageArray.Length - 1; y++) 
+                {
+                    if (tileArray[x].peiceName == stringArray[y]) 
+                    {
+                        tileArray[x].pictureBox.Image = imageArray[y];
+                    }
+                }
+                
+                if (availibleSpace[x] == true && tileArray[x].pictureBox.BackColor == Color.SaddleBrown) { tileArray[x].pictureBox.BackgroundImage = Resources.Dark; }
+                else if (availibleSpace[x] == true && tileArray[x].pictureBox.BackColor == Color.White) { tileArray[x].pictureBox.BackgroundImage = Resources.Light; }
                 else { tileArray[x].pictureBox.BackgroundImage = Resources.Empty; }
-              
-                //testing
-                testTile.pictureBox.Size = A1.Size;
-                testTile.pictureBox.Location = new Point(12,12);
-                testTile.pictureBox.BackColor = Color.White;
+                tileArray[x].peiceName = Convert.ToString(tileArray[x].pictureBox.Image);
             }
         }
 
@@ -124,7 +101,27 @@ Resources.WhiteRook,Resources.WhiteHorse,Resources.WhiteBishop,Resources.WhiteKi
 
         private void updateDisplayTestButton_Click(object sender, EventArgs e)
         {
+            tileClicked();
             updateDisplay();
+        }
+
+        public void tileClicked()
+        {
+        availibleSpace = new bool[] {
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        false, false, false, false, false, false, false, false,
+        };
+           if ("WhitePawn" == stringArray[7])
+           {
+                availibleSpace[currentTile - boardWidth] = true;
+                label1.Text = $"{Convert.ToString(tileArray[currentTile].peiceName)}";
+           }
         }
     }
 }

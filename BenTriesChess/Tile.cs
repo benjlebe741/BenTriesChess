@@ -5,26 +5,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BenTriesChess;
+using BenTriesChess.Properties;
 
 namespace BenTriesChess
 {
     internal class Tile
     {
         public PictureBox pictureBox = new PictureBox();
-        
-      public Tile(Point _point,Color _backcolor) 
+        int pictureSize = 72;
+        int number;
+        public string peiceName;
+      public Tile(Point _point,Color _backcolor, int _number, string name) 
         {
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox.BackColor = _backcolor;
-            pictureBox.Width = 100;
-            pictureBox.Height = 100;
+            pictureBox.Width = pictureSize;
+            pictureBox.Height = pictureSize;
             pictureBox.Location = _point;
-            pictureBox.Visible = true;
-            pictureBox.Enabled = true;
+            
+            pictureBox.MouseClick += PictureBox_MouseClick;
+        number = _number;
+            peiceName = name;
         }
-        void OnMouseDown()
+
+        private void PictureBox_MouseClick(object sender, MouseEventArgs e)
         {
-           pictureBox.BackColor = Color.AliceBlue;
+           Form1.currentTile = number;
         }
     }
 }

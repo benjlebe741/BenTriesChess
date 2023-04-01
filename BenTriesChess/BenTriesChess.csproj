@@ -129,5 +129,8 @@
   <ItemGroup>
     <None Include="Resources\CanMoveHere.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CanMoveHere1.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

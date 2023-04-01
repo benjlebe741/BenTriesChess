@@ -123,9 +123,9 @@ namespace BenTriesChess.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CanMoveHere {
+        internal static System.Drawing.Bitmap Dark {
             get {
-                object obj = ResourceManager.GetObject("CanMoveHere", resourceCulture);
+                object obj = ResourceManager.GetObject("Dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +136,16 @@ namespace BenTriesChess.Properties {
         internal static System.Drawing.Bitmap Empty {
             get {
                 object obj = ResourceManager.GetObject("Empty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Light {
+            get {
+                object obj = ResourceManager.GetObject("Light", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
